@@ -16,9 +16,10 @@ def parse_sequence_counts(filename):
     with open(filename) as f:
         for line in f:
             if not line.startswith('>'):
-                sequence = line.strip()
-                current_count = seq_counts.get(sequence, 0)
-                seq_counts[sequence] = current_count + 1
+                seq = line.strip()
+                if seq:
+                  current_count = seq_counts.get(seq, 0)
+                  seq_counts[seq] = current_count + 1
     return seq_counts
 
 def sort_sequence_counts(sequence_counts):
@@ -65,10 +66,10 @@ if __name__ == "__main__":
     import doctest
     doctest.testmod()
 
-    parser = argparse.ArgumentParser(description='Count sequence occurances.')
+    parser = argparse.ArgumentParser(description='Count full sequence occurances in a fasta file.')
     parser.add_argument('filename', nargs='?', type=argparse.FileType('r'),
                         help='Fasta file to read.',
-                        default='./test_files/fasta/sample.fasta')
+                        default='./sample_files/fasta/sample.fasta')
     parser.add_argument('--top', dest='top_count', type=int, default=10,
                        help='Number of sequence counts to report.')
     args = parser.parse_args()
