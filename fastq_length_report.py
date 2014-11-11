@@ -79,7 +79,7 @@ if __name__ == "__main__":
                         help='Directory to search for fastq files to read.',
                         default='./sample_files/fastq')
     parser.add_argument('--basepairs', dest='base_pair_limit', type=int, default=30,
-                       help='Report percentages of sequences with base pairs over limit.')
+                        help='Report percentages of sequences with base pairs over limit.')
     args = parser.parse_args()
 
     print_sequence_length_report(args.directorypath, args.base_pair_limit)

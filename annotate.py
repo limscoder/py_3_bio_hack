@@ -40,24 +40,13 @@ def parse_gene_locations(filepath):
             end = int(row[4])
             annotations = parse_annotations(row[8])
             chromosome_map = gene_locations.setdefault(chromosome, {})
-            gene_map = chromosome_map.setdefault(annotations['gene_name'],
+            gene_map = chromosome_map.setdefault(annotations.get('gene_name', 'NOT_NAMED'),
                                                  {'start': start, 'end': end})
             if start < gene_map['start']:
                 gene_map['start'] = start
             if end > gene_map['end']:
                 gene_map['end'] = end
     return gene_locations
-
-def parse_chromosome_locations(filepath):
-    """
-    Parses chromosome locations from a file.
-
-    >>> parse_chromosome_locations('./test_files/annotate/doc_test_coordinates.txt')
-    [('chr3', 134196550), ('chr3', 135), ('chr9', 136335909)]
-    """
-
-    with open(filepath) as f:
-        return [(chromosome, int(location)) for chromosome, location in csv.reader(f, delimiter="\t")]
 
 def get_gene_name(chromosome_location, gene_locations):
     """
@@ -83,13 +72,16 @@ def write_chromosome_annotations(chromosome_filepath, gtf_filepath, out_filepath
     """Write chromosome annotations to outfilepath."""
 
     gene_locations = parse_gene_locations(gtf_filepath)
-    chromosome_locations = parse_chromosome_locations(chromosome_filepath)
 
-    with open(out_filepath, 'w') as f:
-        writer = csv.writer(f, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
-        for chromosome_location in chromosome_locations:
-            gene_name = get_gene_name(chromosome_location, gene_locations)
-            writer.writerow((chromosome_location[0], chromosome_location[1], gene_name))
+    with open(chromosome_filepath) as infile:
+        reader = csv.reader(infile, delimiter="\t")
+
+        with open(out_filepath, 'w') as outfile:
+            writer = csv.writer(outfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
+
+            for chromosome, location in reader:
+                gene_name = get_gene_name((chromosome, int(location)), gene_locations)
+                writer.writerow((chromosome, location, gene_name))
 
 if __name__ == "__main__":
     import argparse

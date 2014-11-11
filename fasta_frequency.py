@@ -4,11 +4,12 @@ def parse_sequence_counts(filename):
     """
     Parses sequence counts from a fasta file.
 
-    >>> parse_sequence_counts('./test_files/fasta/doc_test.fasta')['AGGCGC']
+    >>> seq_counts = parse_sequence_counts('./test_files/fasta/doc_test.fasta')
+    >>> seq_counts['AGGCGC']
     3
-    >>> parse_sequence_counts('./test_files/fasta/doc_test.fasta')['TGCATC']
+    >>> seq_counts['TGCATC']
     2
-    >>> parse_sequence_counts('./test_files/fasta/doc_test.fasta')['ATAGGG']
+    >>> seq_counts['ATAGGG']
     1
     """
 
@@ -26,13 +27,14 @@ def sort_sequence_counts(sequence_counts):
     """
     Sorts sequence_count dict by count descending.
 
-    >>> sort_sequence_counts({'AGG':2, 'CAT': 3, 'GGC': 10, 'AAT': 5})[0]['sequence']
+    >>> sorted_counts = sort_sequence_counts({'AGG':2, 'CAT': 3, 'GGC': 10, 'AAT': 5})
+    >>> sorted_counts[0]['sequence']
     'GGC'
-    >>> sort_sequence_counts({'AGG':2, 'CAT': 3, 'GGC': 10, 'AAT': 5})[1]['sequence']
+    >>> sorted_counts[1]['sequence']
     'AAT'
-    >>> sort_sequence_counts({'AGG':2, 'CAT': 3, 'GGC': 10, 'AAT': 5})[2]['sequence']
+    >>> sorted_counts[2]['sequence']
     'CAT'
-    >>> sort_sequence_counts({'AGG':2, 'CAT': 3, 'GGC': 10, 'AAT': 5})[3]['sequence']
+    >>> sorted_counts[3]['sequence']
     'AGG'
     """
 
@@ -67,11 +69,11 @@ if __name__ == "__main__":
     doctest.testmod()
 
     parser = argparse.ArgumentParser(description='Count full sequence occurances in a fasta file.')
-    parser.add_argument('filename', nargs='?', type=argparse.FileType('r'),
+    parser.add_argument('filename', nargs='?', type=str,
                         help='Fasta file to read.',
                         default='./sample_files/fasta/sample.fasta')
     parser.add_argument('--top', dest='top_count', type=int, default=10,
-                       help='Number of sequence counts to report.')
+                        help='Number of sequence counts to report.')
     args = parser.parse_args()
 
-    print_sequence_count_report(args.filename.name, args.top_count)
+    print_sequence_count_report(args.filename, args.top_count)
