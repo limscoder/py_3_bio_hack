@@ -1,4 +1,5 @@
 .content {
+  min-width: 1024px;
   width: 100%;
   height: 100%;
   background-color: #f3f3f3;
@@ -28,6 +29,7 @@
   border-bottom: 1px solid #8a8a8a;
   padding: 5px 5px 5px 0;
   height: 105px;
+  min-width: 310px;
 }
 
 .sequence-summary.selected {
@@ -65,7 +67,6 @@
 
 .sequence-summary.clickable .sequence-expander {
   display: inline-block;
-  float: right;
 }
 
 .sequence-detail {
@@ -78,7 +79,6 @@
 .sequence-text {
   word-wrap: break-word;
   font-family: Courier, monospace;
-  /*background-color: #1f1f1f;*/
   color: #1f1f1f;
   padding: 5px;
 }
@@ -90,24 +90,52 @@
 
 .very-good-score {
   background-color: #13e800;
+  fill: #13e800;
 }
 
 .good-score {
   background-color: rgba(19, 232, 0, 0.6);
+  fill: rgba(19, 232, 0, 0.6);
 }
 
 .acceptable-score {
   background-color: #ffea00;
+  fill: #ffea00;
 }
 
 .poor-score {
   background-color: #ff8400;
+  fill: #ff8400;
 }
 
 .very-poor-score {
   background-color: #ff2a00;
+  fill: #ff2a00;
 }
 
 .unreliable-score {
   background-color: #5c5c5d;
+  fill: #5c5c5d;
+}
+
+.fill-generic {
+  fill: #00b3ff;
+}
+
+.stroke-generic {
+  stroke: #00b3ff;
+  stroke-width: 1;
+  fill: none;
+}
+
+.stats-container {
+  background-color: #fff;
+  margin: 0 10px 10px 10px;
+  min-width: 340px;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #1f1f1f;
+  shape-rendering: crispEdges;
 }

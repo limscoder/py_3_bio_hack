@@ -46,12 +46,6 @@ module.exports = function(grunt) {
         expand: true,
         src: ['node_modules/bootstrap/dist/js/*'],
         dest: 'dist/sequence/lib/bootstrap/js'
-      },
-      d3Js: {
-        flatten: true,
-        expand: true,
-        src: ['node_modules/d3/dj.min.js'],
-        dest: 'dist/sequence/lib/d3'
       }
     },
 
@@ -80,7 +74,7 @@ module.exports = function(grunt) {
         },
 
         debug: false,
-        devtool: 'source-maps',
+        devtool: 'source-map',
 
         stats: {
           colors: true,

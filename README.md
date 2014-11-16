@@ -17,13 +17,12 @@ Hacking together some Python 3 scripts for processing bio files.
 
 **Webapp UI (fastq quality inspector)**
 
-Requires node/npm
+Open ./webapp/dist/sequence/app.html in browser.
 
-    brew install node
+    /usr/bin/open -a "/Applications/Google Chrome.app" ./webapp/dist/sequence/app.html
 
-Project build
+Project build (requires node/npm: brew install node)
 
     cd webapp
     npm install
     grunt build
-    /usr/bin/open -a "/Applications/Google Chrome.app" ./dist/sequence/app.html
